@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Window size="900,610" roundcorner="2,2" caption="0,0,0,38" >
+	<Font name="微软雅黑" size="16"/>
+	<Font name="微软雅黑"/>
+	<Font name="微软雅黑" size="12" default="true"/>
+	<Default name="VScrollBar" value="width=&quot;8&quot; showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; thumbnormalimage=&quot;file='thumbnormalimage.png' corner='4,4,4,4'&quot; thumbhotimage=&quot;file='thumbhotimage.png' corner='4,4,4,4'&quot; thumbpushedimage=&quot;file='thumbhotimage.png' corner='4,4,4,4'&quot;" />
+	<VerticalLayout bkcolor="0xfff0f0f0" inset="1,1,1,1" bordersize="1" bordercolor="0xff808080">
+		<HorizontalLayout height="38" bkcolor="0xffe1e1e1">
+			<Control width="10"/>
+			<Label text="打包精灵 v0.1" font="0" height="38"/>
+			<Control />
+			<Button name="closebtn" tooltip="关闭" width="38" height="38" normalimage="captionbar-btn-close-0.png" hotimage="captionbar-btn-close-1.png" pushedimage="captionbar-btn-close-2.png"/>
+		</HorizontalLayout>
+		<HorizontalLayout inset="0,8,0,0" height="350">
+			<List name="project_list" height="322" inset="1,1,1,0" itemselectedbkcolor="0xffdbdfe7" vscrollbar="true">
+				<ListHeader height="30" >
+					<ListHeaderItem minwidth="220" textcolor="0xff98999a" text="工程" font="1" bkimage="list_header_bk.png" sepwidth="1" sepimage="list_header_sep.png"/>
+					<ListHeaderItem minwidth="190" textcolor="0xff98999a" text="配置文件" font="1" bkimage="list_header_bk.png" sepwidth="1" sepimage="list_header_sep.png"/>
+					<ListHeaderItem minwidth="70" maxwidth="70" textcolor="0xff98999a" text="编译器版本" font="1" bkimage="list_header_bk.png" sepwidth="1" sepimage="list_header_sep.png"/>
+					<ListHeaderItem textcolor="0xff98999a" text="配置名称" font="1" bkimage="list_header_bk.png" sepwidth="1" sepimage="list_header_sep.png"/>
+					<ListHeaderItem textcolor="0xff98999a" text="编译平台" font="1" bkimage="list_header_bk.png" sepwidth="1" sepimage="list_header_sep.png"/>
+					<ListHeaderItem textcolor="0xff98999a" text="编译结果" font="1" bkimage="list_header_bk.png" />
+				</ListHeader>
+			</List>
+		</HorizontalLayout>
+		<HorizontalLayout height="20">
+			<Control />
+			<Button name="go-compile" text="编译" height="20" width="60" hottextcolor="0xffff0000" pushedtextcolor="0xffcc0000"/>
+			<Control width="5"/>
+			<Button name="cancel" text="取消" height="20" width="60" hottextcolor="0xffff0000" pushedtextcolor="0xffcc0000"/>
+		</HorizontalLayout>
+		<RichEdit height="200" bkcolor="0xffc0c0c0" name="buildresult" vscrollbar="true" autovscroll="true">
+		</RichEdit>
+	</VerticalLayout>
+</Window>
