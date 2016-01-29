@@ -11,6 +11,11 @@
 			<Control />
 			<Button name="closebtn" tooltip="关闭" width="38" height="38" normalimage="captionbar-btn-close-0.png" hotimage="captionbar-btn-close-1.png" pushedimage="captionbar-btn-close-2.png"/>
 		</HorizontalLayout>
+		<HorizontalLayout height="25">
+			<Edit height="23" name="cfg_path" enabled="false"/>
+			<Button name="find_cfg" text="查找" height="23" width="60" hottextcolor="0xffff0000"/>
+			<Control width="20"/>
+		</HorizontalLayout>
 		<HorizontalLayout inset="0,8,0,0" height="350">
 			<List name="project_list" height="322" inset="1,1,1,0" itemselectedbkcolor="0xffdbdfe7" vscrollbar="true">
 				<ListHeader height="30" >

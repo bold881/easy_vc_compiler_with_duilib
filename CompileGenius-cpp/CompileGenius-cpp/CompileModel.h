@@ -1,7 +1,6 @@
 #pragma once
 #include "gGlobalDefine.h"
 #include "CompilerWnd.h"
-#include "CompilerThread.h"
 
 
 class CompileModel
@@ -10,8 +9,9 @@ public:
 	CompileModel(void);
 	~CompileModel(void);
 
-protected:
+
 	CCompilerWnd m_compilerwnd;
+public:
 
 	std::vector<PROJECTDATA> m_PrjData;
 
@@ -37,8 +37,7 @@ private:
 private:
 	int getHisCfgFilePath();
 
-	// 解析总配置文件 
-	int ParseConfigFile(void);
+
 
 	// 获取visual studio的安装路径
 	void GetVisualStudioInstallDir(
@@ -54,9 +53,6 @@ private:
 		IN CString& szKeyName, // 子健名称
 		OUT CString& szKeyValue); // 子健的值
 
-	// 解析具体每个项目的配置文件
-	void ParseSpecCfgFile(void);
-
 	// 解析工程文件
 	void ParseVcProjFile(
 		COMPILE_NODE& pNode,	// 当前正在处理的节点
@@ -67,6 +63,11 @@ private:
 
 	// 设置注册表值
 	bool SetHistoryCfgInReg();
+
+	// 删除文件夹及其中文件
+	bool DeleteDirectory(
+		const CString &strPath);
+
 
 public:
 	// 编译
@@ -79,6 +80,17 @@ public:
 	void RecordUserCompileSetting(const int nItem, 
 		const int nCfg,
 		CString &szCfg);
+
+	void setHisCfgPath(CString& szPath)
+	{
+		m_szHisCfgFile = szPath;
+	};
+
+	// 解析具体每个项目的配置文件
+	void ParseSpecCfgFile(void);
+
+	// 解析总配置文件 
+	int ParseConfigFile(void);
 private:
 	bool CreateCompileBatchFile(
 		IN CString &szOriginalBatchFile,	// 原始的批处理文件

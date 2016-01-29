@@ -15,9 +15,13 @@ public:
 
 	void _init();
 
-	inline void setProjectData(std::vector<PROJECTDATA>& prjData)
+	void setProjectData(std::vector<PROJECTDATA>& prjData)
 	{
 		m_pPrjData = &prjData;
+	};
+
+	inline void setCfgHistFile(CString& szFile){
+		m_szHistoryCfg = szFile;
 	};
 
 	void OnPrepare();
@@ -94,4 +98,9 @@ private:
 	CString m_szHistoryCfg;	// 自定义的项目配置文件
 
 	std::vector<PROJECTDATA>* m_pPrjData;
+
+	DuiLib::CEditUI* m_pEditCfgPath;	// Edit用以显示历史配置文件
+
+	DuiLib::CButtonUI* m_pBtnFindCfgFile;	// 查找历史配置文件
+	
 };

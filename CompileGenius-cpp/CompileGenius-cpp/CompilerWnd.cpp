@@ -44,11 +44,16 @@ void CCompilerWnd::Notify(DuiLib::TNotifyUI& msg)
 		}
 		else if(msg.pSender == m_pGoCompile)
 		{
+			// 清除编译结果窗口
 			if(m_pCtrlBuildString!=NULL)
 				m_pCtrlBuildString->SetText(_T(""));
+			// 屏蔽重新加载配置文件窗口
+			m_pBtnFindCfgFile->SetEnabled(false);
 
 			if(pCmpModel != NULL)
 				pCmpModel->CompileNode();
+
+			m_pBtnFindCfgFile->SetEnabled(true);
 			return;
 		}
 		else if(msg.pSender->GetName().Find(_T("_projectname")) != -1)
@@ -59,12 +64,34 @@ void CCompilerWnd::Notify(DuiLib::TNotifyUI& msg)
 				pCmpModel->OpenProjectSolution(szName);
 			return;
 		}
+		else if(msg.pSender->GetName().Find(_T("_result")) != -1)
+		{
+			m_pCtrlBuildString->SetText(msg.pSender->GetUserData());
+			return;
+		} else if(msg.pSender == m_pBtnFindCfgFile) {
+			GetCfgFile();
+			SetHistoryCfgInReg();
+			pCmpModel->setHisCfgPath(m_szHistoryCfg);
+			m_pEditCfgPath->SetText(m_szHistoryCfg);
+			pCmpModel->ParseConfigFile();
+			pCmpModel->ParseSpecCfgFile();
+			AddDataToUI();
+		}
 	}
 	else if(msg.sType==_T("selectchanged"))
 	{
 		CString name = msg.pSender->GetName();
 		if(name.Find(_T("_check")) != -1)
 		{
+			// 检测鼠标位置和空间位置，判断是否点击选择的。
+			RECT ctrRect = msg.pSender->GetPos();
+			POINT pt;
+			GetCursorPos(&pt);
+			ScreenToClient(m_hWnd, &pt);
+			if(pt.x<ctrRect.left||pt.x>ctrRect.right
+				||pt.y<ctrRect.top||pt.y>ctrRect.bottom)
+				return;
+
 			name.Replace(_T("_check"), _T(""));
 			int nIndex = _wtoi(name);
 			DuiLib::COptionUI* pCurOp = static_cast<DuiLib::COptionUI*>(msg.pSender);
@@ -402,10 +429,10 @@ void CCompilerWnd::OnPrepare()
 	m_pCancelBtn = static_cast<DuiLib::CButtonUI*>(m_pm.FindControl(_T("cancel")));
 	m_pCancelBtn->SetVisible(false);
 	m_pCtrlBuildString = static_cast<DuiLib::CRichEditUI*>(m_pm.FindControl(_T("buildresult")));
-
+	m_pEditCfgPath = static_cast<DuiLib::CEditUI*>(m_pm.FindControl(_T("cfg_path")));
+	m_pBtnFindCfgFile = static_cast<DuiLib::CButtonUI*>(m_pm.FindControl(_T("find_cfg")));
 	// 添加数据到界面
 	AddDataToUI();
-
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -460,8 +487,13 @@ bool CCompilerWnd::GetCfgFile()
 // 向列表中添加数据
 void CCompilerWnd::AddDataToUI(void)
 {
+	// 配置文件
+	m_pEditCfgPath->SetText(m_szHistoryCfg);
+
 	if(m_pPrjData == NULL)
 		return;
+
+	m_pProjectList->RemoveAll();
 
 	std::vector<PROJECTDATA>::iterator itProj = m_pPrjData->begin();
 	for (int i = 0; itProj!=m_pPrjData->end(); itProj++, i++)
@@ -492,6 +524,7 @@ void CCompilerWnd::AddNodeToUI(PROJECTDATA& pNode, int& nIndex)
 	// 项目名称
 	DuiLib::CLabelUI* pPrjName = new DuiLib::CLabelUI;
 	pPrjName->SetText(pNode.szPrjName);
+	pPrjName->SetToolTip(pNode.szPrjName);
 	pVecLeft->Add(pPrjName);
 
 	// 子工程的选取
@@ -538,7 +571,13 @@ void CCompilerWnd::AddNodeToUI(PROJECTDATA& pNode, int& nIndex)
 		//pChildPrjTitle->SetText(childIt->szPrjName);
 		//pChildHor->Add(pChildPrjTitle);
 		DuiLib::CButtonUI* pBtnChildPrjTitle = new DuiLib::CButtonUI;
-		pBtnChildPrjTitle->SetText(childIt->szPrjName);
+		if(childIt->cfgType == vcproject){
+			pBtnChildPrjTitle->SetText(childIt->szPrjName);
+		} else if(childIt->cfgType == copyfile) {
+			pBtnChildPrjTitle->SetText(_T("文件复制"));
+		} else if(childIt->cfgType == delfolder) {
+			pBtnChildPrjTitle->SetText(_T("删除文件夹"));
+		}
 		pBtnChildPrjTitle->ApplyAttributeList(_T("hottextcolor=\"0xff8000ff\" pushedtextcolor=\"0xff2112ed\""));
 		CString szBtnPrjName;
 		szBtnPrjName.Format(_T("%d_%d_projectname"), nIndex, childIndex);
@@ -548,7 +587,16 @@ void CCompilerWnd::AddNodeToUI(PROJECTDATA& pNode, int& nIndex)
 
 		// 配置文件路径
 		DuiLib::CLabelUI* pChildPrjCfgPath = new DuiLib::CLabelUI;
-		pChildPrjCfgPath->SetText(childIt->sz_PrjFilePath);
+		if(childIt->cfgType == vcproject) {
+			pChildPrjCfgPath->SetText(childIt->sz_PrjFilePath); 
+			pChildPrjCfgPath->SetToolTip(childIt->sz_PrjFilePath);
+		} else if(childIt->cfgType == copyfile) {
+			pChildPrjCfgPath->SetText(childIt->szSrcFile);
+			pChildPrjCfgPath->SetToolTip(childIt->szSrcFile);
+		} else if(childIt->cfgType == delfolder) {
+			pChildPrjCfgPath->SetText(childIt->szDelFolder);
+			pChildPrjCfgPath->SetToolTip(childIt->szDelFolder);
+		}
 		pChildPrjCfgPath->SetFixedHeight(23);
 		pVecChdPrjPath->Add(pChildPrjCfgPath);
 
@@ -603,8 +651,8 @@ void CCompilerWnd::AddNodeToUI(PROJECTDATA& pNode, int& nIndex)
 		DuiLib::CLabelUI* pPlatVer = new DuiLib::CLabelUI;
 		pPlatVer->SetFixedHeight(23);
 		pPlatVer->SetTextStyle(DT_VCENTER|DT_CENTER);
-		if(childIt->vecConfiguration.size() == 0)
-			continue;
+		//if(childIt->vecConfiguration.size() == 0)
+		//	continue;
 		
 		bool noVecCfgSelected = true;
 		for (int vecCfgIndex = 0; vecCfgIndex < childIt->vecConfiguration.size(); vecCfgIndex++)
@@ -625,13 +673,13 @@ void CCompilerWnd::AddNodeToUI(PROJECTDATA& pNode, int& nIndex)
 		//childIt->vecConfiguration.begin()->isSelected = true;
 
 		// 编译结果
-		DuiLib::CLabelUI *pLbResult = new DuiLib::CLabelUI;
-		pLbResult->SetFixedHeight(23);
-		pLbResult->SetTextStyle(DT_CENTER|DT_VCENTER);
+		DuiLib::CButtonUI *pBtnResult = new DuiLib::CButtonUI;
+		pBtnResult->SetFixedHeight(23);
+		pBtnResult->SetTextStyle(DT_CENTER|DT_VCENTER);
 		CString szResultName;
 		szResultName.Format(_T("%d_%d_result"), nIndex, childIndex);
-		pLbResult->SetName(szResultName);
-		pVecCmpResult->Add(pLbResult);
+		pBtnResult->SetName(szResultName);
+		pVecCmpResult->Add(pBtnResult);
 	}
 }
 
@@ -679,12 +727,13 @@ void CCompilerWnd::ShowItemResult(int nItem,
 		szResult = _T("失败");
 	}
 
-	CString szLabelName;
-	szLabelName.Format(_T("%d_%d_result"), nItem, nCfg);
-	DuiLib::CLabelUI* pLabelResult =
-		static_cast<DuiLib::CLabelUI*>(m_pm.FindControl(szLabelName));
-	if(pLabelResult != NULL)
+	CString szBtnName;
+	szBtnName.Format(_T("%d_%d_result"), nItem, nCfg);
+	DuiLib::CLabelUI* pBtnResult =
+		static_cast<DuiLib::CButtonUI*>(m_pm.FindControl(szBtnName));
+	if(pBtnResult != NULL)
 	{
-		pLabelResult->SetText(szResult);
+		pBtnResult->SetText(szResult);
+		pBtnResult->SetUserData(szOutcome);
 	}
 }

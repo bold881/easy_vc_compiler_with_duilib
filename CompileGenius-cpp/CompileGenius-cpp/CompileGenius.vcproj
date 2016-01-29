@@ -239,7 +239,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\Duilib"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;MARKUP_STL"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;MARKUP_STL;_AMD64_MODE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -419,10 +419,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\CompilerThread.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\CompilerWnd.cpp"
 				>
 			</File>
@@ -481,14 +477,6 @@
 			>
 			<File
 				RelativePath=".\CompileModel.h"
-				>
-			</File>
-			<File
-				RelativePath=".\CompilerThread.h"
-				>
-			</File>
-			<File
-				RelativePath=".\CompilerWnd.h"
 				>
 			</File>
 			<File

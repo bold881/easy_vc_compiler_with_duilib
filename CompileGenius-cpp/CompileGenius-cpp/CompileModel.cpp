@@ -5,8 +5,8 @@
 #include "Shellapi.h"
 #include "Commdlg.h"
 #include "Shlwapi.h"
-#include "CompilerThread.h"
 
+int nTotalItem = 0;
 
 CompileModel::CompileModel(void):
 m_nIsSys32Or64(0)
@@ -26,6 +26,8 @@ CompileModel::~CompileModel(void)
 #define VS_10_12_HEADER _T("Project")
 
 #define LASTCONFIG _T("lastconfig")
+#define DEST	_T("dest")
+#define SRC		_T("src")
 
 //////////////////////////////////////////////////////////////////////////
 // ³õÊ¼»¯
@@ -52,6 +54,7 @@ bool CompileModel::_init()
 
 	// ³õÊ¼»¯½çÃæ
 	m_compilerwnd.setProjectData(m_PrjData);
+	m_compilerwnd.setCfgHistFile(m_szHisCfgFile);
 	m_compilerwnd.SetModelPointer((void*)this);
 	m_compilerwnd._init();
 
@@ -128,14 +131,30 @@ int CompileModel::ParseConfigFile()
 			PROJECTDATA gNode;
 			gNode.szPrjName = xml.GetAttrib(_T("ProjectName")).c_str();
 			xml.IntoElem();
-			while (xml.FindElem(_T("p")))
+			while (xml.FindElem())
 			{	
-				COMPILE_NODE cNode;
-				cNode.sz_PrjFilePath = xml.GetData().c_str();
-				cNode.szLastCfg = xml.GetAttrib(LASTCONFIG).c_str();
-				cNode.bResult = false;
-				cNode.bNeedCompile = false;
-				gNode.childCompileNode.push_back(cNode);
+				if(xml.GetTagName() == _T("p")){
+					COMPILE_NODE cNode;
+					cNode.sz_PrjFilePath = xml.GetData().c_str();
+					cNode.szLastCfg = xml.GetAttrib(LASTCONFIG).c_str();
+					cNode.bResult = false;
+					cNode.bNeedCompile = false;
+					cNode.cfgType = vcproject;
+					gNode.childCompileNode.push_back(cNode); 
+				} else if( xml.GetTagName() == _T("f")) {
+					COMPILE_NODE cNode;
+					cNode.szSrcFile = xml.GetAttrib(SRC).c_str();
+					cNode.szDestFile = xml.GetAttrib(DEST).c_str();
+					cNode.cfgType = copyfile;
+					cNode.bNeedCompile = false;
+					gNode.childCompileNode.push_back(cNode);
+				} else if(xml.GetTagName() == _T("d")) {
+					COMPILE_NODE cNode;
+					cNode.szDelFolder = xml.GetData().c_str();
+					cNode.bNeedCompile = false;
+					cNode.cfgType = delfolder;
+					gNode.childCompileNode.push_back(cNode);
+				}
 			}
 			xml.OutOfElem();
 			m_PrjData.push_back(gNode);
@@ -300,8 +319,11 @@ void CompileModel::ParseSpecCfgFile()
 		std::vector<COMPILE_NODE>::iterator iNode = itProj->childCompileNode.begin();
 		for (; iNode != itProj->childCompileNode.end(); iNode++)
 		{
-			if(PathFileExists(iNode->sz_PrjFilePath))
-				ParseVcProjFile(*iNode, iNode->sz_PrjFilePath);
+			if(iNode->cfgType == vcproject)
+			{
+				if(PathFileExists(iNode->sz_PrjFilePath))
+					ParseVcProjFile(*iNode, iNode->sz_PrjFilePath);
+			}
 		}
 	}
 }
@@ -418,20 +440,12 @@ void CompileModel::ParseVcProjFile(COMPILE_NODE& pNode, CString &szFile)
 }
 
 
-// ²âÊÔ
-void testThread(void* pArg)
-{
-	MessageBox(NULL, _T("hello"), NULL, MB_OK);
-}
-
-
-
-
 //////////////////////////////////////////////////////////////////////////
 // ±àÒë½Úµã
 void CompileModel::CompileNode(void)
 {
-	_beginthread(testThread, 0, NULL);
+	nTotalItem = 0;
+	//_beginthread(testThread, 0, this);
 
 	if(m_szVs2005VCPath.IsEmpty() ||
 		m_szVs2008VCPath.IsEmpty() ||
@@ -440,7 +454,7 @@ void CompileModel::CompileNode(void)
 			MessageBox(NULL, 
 				_T("VC2005¡¢2008¡¢2010¡¢2012µÄÂ·¾¶Ã»ÓÐÉèÖÃ£¬»òÕßÆäÖÐÒ»¸öÂ·¾¶Ã»ÓÐÉèÖÃ"),
 				_T("´ò°ü¾«Áé"), MB_OK);
-			return;
+			//return;
 	}
 
 	
@@ -457,81 +471,93 @@ void CompileModel::CompileNode(void)
 		{
 			if(!itChild->bNeedCompile)
 				continue;
-			
-			// Ô­Ê¼Åú´¦ÀíÎÄ¼þµØÖ·
-			CString szBatFilePath;
+			if(itChild->cfgType == vcproject) {
+				
+				// Ô­Ê¼Åú´¦ÀíÎÄ¼þµØÖ·
+				CString szBatFilePath;
 
-			if(itChild->nCompilerVer == vs80)
-				szBatFilePath = m_szVs2005VCPath;
-			else if(itChild->nCompilerVer == vs90)
-				szBatFilePath = m_szVs2008VCPath;
-			else if(itChild->nCompilerVer == vs100)
-				szBatFilePath = m_szVs2010VCPath;
-			else if(itChild->nCompilerVer == vs110)
-				szBatFilePath = m_szVs2012VCPath;
+				if(itChild->nCompilerVer == vs80)
+					szBatFilePath = m_szVs2005VCPath;
+				else if(itChild->nCompilerVer == vs90)
+					szBatFilePath = m_szVs2008VCPath;
+				else if(itChild->nCompilerVer == vs100)
+					szBatFilePath = m_szVs2010VCPath;
+				else if(itChild->nCompilerVer == vs110)
+					szBatFilePath = m_szVs2012VCPath;
 
-			// ¹¤³ÌÅäÖÃÎÄ¼þµØÖ·
-			CString szPrjFilePath = itChild->sz_PrjFilePath;
+				// ¹¤³ÌÅäÖÃÎÄ¼þµØÖ·
+				CString szPrjFilePath = itChild->sz_PrjFilePath;
 
-			//±àÒëÑ¡ÏîÃû³Æ
-			CString szSpecCompileName;
-			//Æ½Ì¨Ãû³Æ
-			CString szPlatformVer;
-			
-			std::vector<COMPILE_INSTANCE>::iterator itCfg = itChild->vecConfiguration.begin();
-			for (;itCfg!=itChild->vecConfiguration.end(); itCfg++)
-			{
-				if(!itCfg->isSelected)
+				//±àÒëÑ¡ÏîÃû³Æ
+				CString szSpecCompileName;
+				//Æ½Ì¨Ãû³Æ
+				CString szPlatformVer;
+				
+				std::vector<COMPILE_INSTANCE>::iterator itCfg = itChild->vecConfiguration.begin();
+				for (;itCfg!=itChild->vecConfiguration.end(); itCfg++)
+				{
+					if(!itCfg->isSelected)
+						continue;
+					szSpecCompileName = itCfg->szInstanceName;
+					szPlatformVer = itCfg->szPlatfromVer;
+					break;
+				}
+				if(szSpecCompileName.IsEmpty() || 
+					szPlatformVer.IsEmpty())
 					continue;
-				szSpecCompileName = itCfg->szInstanceName;
-				szPlatformVer = itCfg->szPlatfromVer;
-				break;
+
+				// ´´½¨ÐÂµÄ±àÒëÎÄ¼þ
+				CString szCreatedBatchFile;
+				CreateCompileBatchFile(szBatFilePath,
+					szPlatformVer,
+					szPrjFilePath,
+					szSpecCompileName,
+					szCreatedBatchFile);
+
+				// Åú´¦ÀíµÄ²ÎÊý
+				CString szParameter;
+				if(szPlatformVer.CompareNoCase(_T("win32")) == 0){
+					szParameter = _T("x86");
+				} else if(szPlatformVer.CompareNoCase(_T("x64")) == 0){
+#if defined(_IA64_MODE)
+					szParameter = _T("ia64");
+#elif defined(_AMD64_MODE)
+					szParameter = _T("amd64");
+#else
+					szParameter = _T("x86_amd64");
+#endif
+				}
+
+				// ±àÒëÆ÷Êä³öµÄ½á¹û
+				CString szRetOutput;
+				DoCompileOneNode(szCreatedBatchFile, 
+					szParameter,
+					szRetOutput);
+
+				//m_compilerwnd.ShowResult(szRetOutput);
+				m_compilerwnd.ShowItemResult(nItem, nCfg, szRetOutput);
+				++nTotalItem;
+			} else if( itChild->cfgType == copyfile) {
+				// ¸´ÖÆÎÄµµ
+				CString szResult;
+				if(CopyFile(itChild->szSrcFile, itChild->szDestFile, FALSE)){
+					szResult = _T("Éú³É³É¹¦¡£´Ó") + itChild->szSrcFile + _T(" µ½ ") + itChild->szDestFile;
+				}
+				m_compilerwnd.ShowItemResult(nItem, nCfg, szResult);
+				++nTotalItem;
+			} else if(itChild->cfgType == delfolder) {
+				// É¾³ýÎÄ¼þ¼Ð¼°Æä×ÓÀà
+				CString szResult;
+				if(this->DeleteDirectory(itChild->szDelFolder)){
+					szResult = _T("Éú³É³É¹¦¡£") + itChild->szDelFolder;
+				}
+
+				m_compilerwnd.ShowItemResult(nItem, nCfg, szResult);
+				++nTotalItem;
 			}
-			if(szSpecCompileName.IsEmpty() || 
-				szPlatformVer.IsEmpty())
-				continue;
-
-			// ´´½¨ÐÂµÄ±àÒëÎÄ¼þ
-			CString szCreatedBatchFile;
-			CreateCompileBatchFile(szBatFilePath,
-				szPlatformVer,
-				szPrjFilePath,
-				szSpecCompileName,
-				szCreatedBatchFile);
-
-			// Åú´¦ÀíµÄ²ÎÊý
-			CString szParameter;
-			if(szPlatformVer.CompareNoCase(_T("win32")) == 0){
-				szParameter = _T("x86");
-			} else if(szPlatformVer.CompareNoCase(_T("x64")) == 0){
-				szParameter = _T("x86_amd64");
-			}
-
-			// ±àÒëÆ÷Êä³öµÄ½á¹û
-			CString szRetOutput;
-			DoCompileOneNode(szCreatedBatchFile, 
-				szParameter,
-				szRetOutput);
-
-			m_compilerwnd.ShowResult(szRetOutput);
-			m_compilerwnd.ShowItemResult(nItem, nCfg, szRetOutput);
 		}
 	}
 
-	//if(m_pCmpThread!=NULL)
-	//{
-	//	m_pCmpThread->stop();
-	//	delete m_pCmpThread;
-	//	m_pCmpThread = NULL;
-	//}
-
-	//m_pCmpThread = new CompilerThread;
-	//m_pCmpThread->setProjData(m_PrjData);
-	//m_pCmpThread->setVsPath(m_szVs2005VCPath,
-	//	m_szVs2008VCPath,
-	//	m_szVs2010VCPath,
-	//	m_szVs2012VCPath);
-	//m_pCmpThread->doit();
 }
 
 
@@ -539,6 +565,7 @@ bool CompileModel::DoCompileOneNode(CString &szBatchFile,	// Åú´¦ÀíÎÄ¼þ
 									CString &szParameter,	// ²ÎÊý
 									CString &szResult)		// ±àÒë½á¹û
 {
+	szBatchFile = _T("\"") + szBatchFile + _T("\"");
 	szBatchFile = szBatchFile + _T(" ") + szParameter;
 	SECURITY_ATTRIBUTES sa;
 	HANDLE hRead, hWrite;
@@ -559,7 +586,7 @@ bool CompileModel::DoCompileOneNode(CString &szBatchFile,	// Åú´¦ÀíÎÄ¼þ
 	GetStartupInfo(&si);
 	si.hStdError = hWrite;
 	si.hStdOutput = hWrite;
-	si.wShowWindow = SW_HIDE;
+	si.wShowWindow = SW_SHOW;
 	si.dwFlags = STARTF_USESHOWWINDOW | STARTF_USESTDHANDLES;
 
 
@@ -567,8 +594,10 @@ bool CompileModel::DoCompileOneNode(CString &szBatchFile,	// Åú´¦ÀíÎÄ¼þ
 	if(!CreateProcess(NULL, szBatchFile.GetBuffer(szBatchFile.GetLength()),
 		NULL,NULL,TRUE,NULL,NULL,NULL,&si, &pi))
 	{
+		szBatchFile.ReleaseBuffer();
 		return false;
 	}
+	szBatchFile.ReleaseBuffer();
 	CloseHandle(hWrite);
 
 
@@ -590,6 +619,7 @@ bool CompileModel::CreateCompileBatchFile(CString &szOriginalBatchFile,	// Ô­Ê¼µ
 										  CString &szCompileCfg,			// ±àÒëÑ¡ÏîµÄÃû³Æ					
 										  CString &szCreatedBatchFile)	// ÐÂÉú³ÉµÄ±àÒëÅäÖÃÎÄ¼þ
 {
+	CString szTempCompileCfg = _T("\"") + szCompileCfg + _T("\"");
 	string line;
 	ifstream origfile(szOriginalBatchFile);
 	szCreatedBatchFile = szOriginalBatchFile;
@@ -614,11 +644,25 @@ bool CompileModel::CreateCompileBatchFile(CString &szOriginalBatchFile,	// Ô­Ê¼µ
 			}
 			else if(szPlatformVer.CompareNoCase(_T("x64")) == 0)
 			{
+#if defined(_IA64_MODE)
+				// ia64
+				if(strcmp(line.c_str(), ":ia64") == 0)
+				{
+					nAddLineIndex++;
+				}
+#elif defined(_AMD64_MODE)
+				if(strcmp(line.c_str(), ":amd64") == 0)
+				{
+					nAddLineIndex++;
+				}
+#else
 				// x86_amd64
 				if(strcmp(line.c_str(), ":x86_amd64") == 0)
 				{
 					nAddLineIndex++;
 				}
+#endif
+
 			}
 
 			if(nAddLineIndex == 3)
@@ -635,7 +679,7 @@ bool CompileModel::CreateCompileBatchFile(CString &szOriginalBatchFile,	// Ô­Ê¼µ
 				szAddedLine.append("msbuild ");
 				szAddedLine.append(CStringA(szProjFile).GetBuffer(szProjFile.GetLength()));
 				szAddedLine.append(" /p:configuration=");
-				szAddedLine.append(CStringA(szCompileCfg).GetBuffer(szCompileCfg.GetLength()));
+				szAddedLine.append(CStringA(szTempCompileCfg).GetBuffer(szTempCompileCfg.GetLength()));
 				outfile << szAddedLine;
 				outfile<<"\n";
 			}
@@ -685,15 +729,20 @@ void CompileModel::RecordUserCompileSetting(int nItem,
 			{
 				xml.IntoElem();
 				int childIndex = 0;
-				while (xml.FindElem(_T("p")))
+				while (xml.FindElem())
 				{	
-					if(childIndex == nCfg)
-					{
-						xml.SetAttrib(LASTCONFIG, szCfg.GetBuffer(szCfg.GetLength()));
-						szCfg.ReleaseBuffer();
-						break;	
+					if(xml.GetTagName() == _T("p") || 
+						xml.GetTagName() == _T("f") || 
+						xml.GetTagName() == _T("d"))
+					{						
+						if(childIndex == nCfg)
+						{
+							xml.SetAttrib(LASTCONFIG, szCfg.GetBuffer(szCfg.GetLength()));
+							szCfg.ReleaseBuffer();
+							break;	
+						}
+						childIndex++;
 					}
-					childIndex++;
 				}
 				xml.OutOfElem();
 				break;
@@ -749,4 +798,35 @@ bool CompileModel::SetHistoryCfgInReg()
 		return true;
 	else
 		return false;
+}
+
+bool CompileModel::DeleteDirectory(const CString &strPath)
+{
+	WIN32_FIND_DATA ffd;
+	HANDLE hFind = INVALID_HANDLE_VALUE;
+	DWORD dwError=0;
+
+	if (strPath.GetLength() > (MAX_PATH - 3)) {
+		return false;
+	}
+	CString tempFolder = strPath + _T("\\*");
+
+	hFind = FindFirstFile(tempFolder, &ffd);
+
+	if (INVALID_HANDLE_VALUE == hFind) {
+		return false;
+	} 
+
+	do
+	{
+		if (!(ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+		{
+			CString szTmpFile = strPath + _T("\\") + ffd.cFileName;
+			DeleteFile(szTmpFile);
+		}
+	}
+	while (FindNextFile(hFind, &ffd) != 0);
+
+	FindClose(hFind);
+	return true;
 }
