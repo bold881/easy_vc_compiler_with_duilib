@@ -58,6 +58,9 @@ private:
 		COMPILE_NODE& pNode,	// 当前正在处理的节点
 		CString &szFile);	// 工程文件的全路径
 
+	// 根据配置选择默认的编译选项
+	void SetDefaultConfigProfile(COMPILE_NODE& pNode);
+
 	// 选择配置文件
 	bool GetCfgFile();
 

@@ -130,6 +130,10 @@ int CompileModel::ParseConfigFile()
 		{
 			PROJECTDATA gNode;
 			gNode.szPrjName = xml.GetAttrib(_T("ProjectName")).c_str();
+			
+			// daifenga add default config 
+			gNode.szDefaultCompileName = xml.GetAttrib(_T("DefaultCfg")).c_str();
+
 			xml.IntoElem();
 			while (xml.FindElem())
 			{	
@@ -140,6 +144,7 @@ int CompileModel::ParseConfigFile()
 					cNode.bResult = false;
 					cNode.bNeedCompile = false;
 					cNode.cfgType = vcproject;
+					cNode.szDefaultCompileName = gNode.szDefaultCompileName;
 					gNode.childCompileNode.push_back(cNode); 
 				} else if( xml.GetTagName() == _T("f")) {
 					COMPILE_NODE cNode;
@@ -321,8 +326,11 @@ void CompileModel::ParseSpecCfgFile()
 		{
 			if(iNode->cfgType == vcproject)
 			{
-				if(PathFileExists(iNode->sz_PrjFilePath))
+				if(PathFileExists(iNode->sz_PrjFilePath)) {
 					ParseVcProjFile(*iNode, iNode->sz_PrjFilePath);
+
+					SetDefaultConfigProfile(*iNode);
+				}
 			}
 		}
 	}
@@ -829,4 +837,46 @@ bool CompileModel::DeleteDirectory(const CString &strPath)
 
 	FindClose(hFind);
 	return true;
+}
+
+
+void CompileModel::SetDefaultConfigProfile(COMPILE_NODE& pNode)
+{
+	if(pNode.szDefaultCompileName.IsEmpty()) {
+		return;
+	}
+
+	std::vector<COMPILE_INSTANCE>::iterator it = pNode.vecConfiguration.begin();
+	int selectedIndex = -1;
+	for (int i=0; it!=pNode.vecConfiguration.end(); it++, i++)
+	{
+		// 记录lastconfig的选择
+		if(it->isSelected) {
+			// lastconfig如果满足defaultconfig则直接返回
+			if(it->szInstanceName.Find(pNode.szDefaultCompileName) !=-1)
+				return;
+			selectedIndex = i;
+			it->isSelected = false;
+			break;
+		}
+		it->isSelected = false;
+	}
+
+	// 比对defaultconfig,若满足defaultconfig，且不为debug，则选中并返回，
+	// 必须要避免一种情况就是Win32和x64同时存在的情况
+	for (it = pNode.vecConfiguration.begin(); it!=pNode.vecConfiguration.end(); it++)
+	{
+		if(it->szInstanceName.Find(pNode.szDefaultCompileName) != -1 && 
+			it->szInstanceName.Find(_T("Debug")) == -1 && 
+			it->szInstanceName.Find(_T("debug")) == -1)
+		{
+			it->isSelected = true;
+			return;
+		}
+	}
+
+	// 恢复lastconfig
+	if(selectedIndex == -1)
+		return;
+	pNode.vecConfiguration.at(selectedIndex).isSelected = true;
 }

@@ -60,12 +60,21 @@ typedef struct compile_node
 	//////////////////////////////////////////////////////////////////////////
 	CString szDelFolder; // 要删除的文件夹的路径
 
+	CString szDefaultCompileName;	// 默认要编译的选项
+
 }COMPILE_NODE;
 
 //////////////////////////////////////////////////////////////////////////
 typedef struct ProjectData{
+	// 项目名称
 	CString szPrjName;
+
+	// 项目默认编译选项
+	CString szDefaultCompileName;
+
+	// 工程组
 	std::vector<COMPILE_NODE> childCompileNode;
+	
 	bool bCompileNeed;
 } PROJECTDATA;
 
