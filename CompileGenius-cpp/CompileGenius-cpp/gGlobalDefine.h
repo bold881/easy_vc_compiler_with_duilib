@@ -15,6 +15,7 @@ enum COMPILER_VER
 	vs90,
 	vs100,
 	vs110,
+	vs140,
 };
 
 

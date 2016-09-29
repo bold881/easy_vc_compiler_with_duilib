@@ -31,6 +31,8 @@ private:
 
 	CString m_szVs2012VCPath;	// vs2012的vc文件夹路径
 
+	CString m_szVs2015VcPath;	// vs2015的vc文件夹路径
+
 	// 系统是否32位系统
 	int m_nIsSys32Or64;	// 0未设置， 1为32位系统, 2为64位系统
 

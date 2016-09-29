@@ -611,6 +611,8 @@ void CCompilerWnd::AddNodeToUI(PROJECTDATA& pNode, int& nIndex)
 			pChildPrjCmpVer->SetText(_T("vs2010"));
 		else if(childIt->nCompilerVer == vs110)
 			pChildPrjCmpVer->SetText(_T("vs2012"));
+		else if(childIt->nCompilerVer == vs140)
+			pChildPrjCmpVer->SetText(_T("vs2015"));
 		else
 			pChildPrjCmpVer->SetText(_T("δ֪"));
 		pChildPrjCmpVer->SetFixedHeight(23);

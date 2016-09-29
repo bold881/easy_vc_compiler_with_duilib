@@ -23,7 +23,7 @@ CompileModel::~CompileModel(void)
 #define PROPERTYGROUP			_T("PropertyGroup")
 
 #define VS_05_08_HEADER _T("VisualStudioProject")
-#define VS_10_12_HEADER _T("Project")
+#define VS_10_12_15HEADER _T("Project")
 
 #define LASTCONFIG _T("lastconfig")
 #define DEST	_T("dest")
@@ -51,6 +51,8 @@ bool CompileModel::_init()
 	GetVisualStudioInstallDir(m_szVs2010VCPath, _T("10.0"));
 
 	GetVisualStudioInstallDir(m_szVs2012VCPath, _T("11.0"));
+
+	GetVisualStudioInstallDir(m_szVs2015VcPath, _T("14.0"));
 
 	// 初始化界面
 	m_compilerwnd.setProjectData(m_PrjData);
@@ -394,7 +396,7 @@ void CompileModel::ParseVcProjFile(COMPILE_NODE& pNode, CString &szFile)
 			}
 		}
 	}
-	else if(xmlProj.FindElem(VS_10_12_HEADER))
+	else if(xmlProj.FindElem(VS_10_12_15HEADER))
 	{
 		// vs2010 vs2012工程
 		pNode.nCompilerVer = vs100;
@@ -408,8 +410,11 @@ void CompileModel::ParseVcProjFile(COMPILE_NODE& pNode, CString &szFile)
 			else if(xmlProj.FindChildElem(_T("PlatformToolset")))
 			{
 				CString szCompilerVer = xmlProj.GetChildData().c_str();
-				if(szCompilerVer == _T("v110"))
+				if(szCompilerVer == _T("v110")) {
 					pNode.nCompilerVer = vs110;
+				} else if(szCompilerVer == _T("v140")) {
+					pNode.nCompilerVer = vs140;
+				}
 			}
 		}
 		xmlProj.ResetMainPos();
@@ -458,9 +463,10 @@ void CompileModel::CompileNode(void)
 	if(m_szVs2005VCPath.IsEmpty() ||
 		m_szVs2008VCPath.IsEmpty() ||
 		m_szVs2010VCPath.IsEmpty() ||
-		m_szVs2012VCPath.IsEmpty()){
+		m_szVs2012VCPath.IsEmpty() ||
+		m_szVs2015VcPath.IsEmpty()){
 			MessageBox(NULL, 
-				_T("VC2005、2008、2010、2012的路径没有设置，或者其中一个路径没有设置"),
+				_T("VS2005、2008、2010、2012、2015的路径没有设置，或者其中一个路径没有设置"),
 				_T("打包精灵"), MB_OK);
 			//return;
 	}
@@ -492,6 +498,8 @@ void CompileModel::CompileNode(void)
 					szBatFilePath = m_szVs2010VCPath;
 				else if(itChild->nCompilerVer == vs110)
 					szBatFilePath = m_szVs2012VCPath;
+				else if(itChild->nCompilerVer == vs140)
+					szBatFilePath = m_szVs2015VcPath;
 
 				// 工程配置文件地址
 				CString szPrjFilePath = itChild->sz_PrjFilePath;
