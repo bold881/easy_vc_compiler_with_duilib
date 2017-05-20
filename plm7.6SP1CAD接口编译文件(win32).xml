@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<g ProjectName="7.6 SP1 win32">
+	<!--CommonAboutDlg-->
+	<p lastconfig="Releasex64">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CommonAboutDlg\CommonAboutDlg_vs08_x64.vcproj</p>
+	<f src="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CommonAboutDlg\CommonAboutDlgU_x64.lib"
+	dest="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\CommonAboutDlgU_x64.lib"/>
+	<f src="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CommonAboutDlg\CommonAboutDlgU_x64.lib"
+	dest="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadDevCore\CommonAboutDlgU_x64.lib"/>
+	
+	<!--PLM_ufidaLoginModule-->
+	<p lastconfig="Releasex64">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\PLM_ufidaLoginModule\pdmLogin_vs08_x64.vcproj</p>
+	<f src="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\PLM_ufidaLoginModule\Debug&Release\pdmLogin_x64\Release\pdmLogin.lib"
+	dest="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\pdmLogin_x64.lib"/>
+	
+	<!--CadDevCore-->
+	<p lastconfig="UReleasex64">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadDevCore\CadDevCore_vs08_x64.vcproj</p>
+	<f src="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadDevCore\x64\URelease\CadDevCore.tlb"
+	dest="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\CadDevCore_x64.tlb"/>
+	
+	<!--CadIPlatform-->
+	<p lastconfig="Releasex64">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\CadIPlatform_vs08_x64.vcproj</p>
+
+	<!--Proe-->
+	<f src="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\x64\Release\CadIPlatform.tlb" 
+	dest="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\CadIPlatform_x64.tlb"/>
+	<p lastconfig="Releasex64">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFCreo2.0Addin_x64.vcxproj</p>
+	<d>Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\Release</d>
+	<p lastconfig="Releasex64">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFProEAddIn5_vs08_x64.vcproj</p>
+	<d>Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\Release</d>
+	<p lastconfig="Releasex64">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFCreo1.0Addin_x64.vcxproj</p>
+	<d>Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\Release</d>
+	
+	<!--Inventor-->
+	<f src="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\x64\Release\CadIPlatform.tlb" 
+	dest="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaInventorIn\CadIPlatform.tlb"/>
+	<p lastconfig="Releasex64">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaInventorIn\iUfidaPlugin_vs08_x64.vcproj</p>
+	
+	<!--SolidWorks-->
+	<p lastconfig="Releasex64">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaSWAddIn\UfidaSWAddIn_vs08_x64.vcproj</p>
+	
+	<!--SolidEdge-->
+	<f src="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\x64\Release\CadIPlatform.tlb" 
+	dest="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouSEAddIn\CadIPlatform.tlb"/>
+	<p lastconfig="Releasex64">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouSEAddIn\YonyouSolidEdge_vs08_x64.vcproj</p>
+	
+	<!--UG-->
+	<f src="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\x64\Release\CadIPlatform.tlb" 
+	dest="Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouUGAddin\CadIPlatform_x64.tlb"/>
+	<p lastconfig="Releasex64">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouUGAddin\YonyouUGAddin_x64_vs08_9.0.vcproj</p>
+	</g>
+	<g ProjectName="AutoCAD Standard">
+	<!--AutoCadStandard-->
+	<d>Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\Release</d>	
+	<p lastconfig="ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2007.vcproj</p>
+	<d>Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\Release</d>
+	<p lastconfig="ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2008.vcproj</p>
+
+	<p>Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2009.vcproj</p>
+	<p>Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2010.vcproj</p>
+	<d>Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\Release</d>
+	<p lastconfig="DebugWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2011.vcproj</p>	
+	<p>Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2012.vcproj</p>
+	<d>Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\Release</d>
+	<p lastconfig="ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2013.vcxproj</p>
+	<d>Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\Release</d>
+	<p lastconfig="ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2014.vcxproj</p>
+	<p lastconfig="Debugx64">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2015.vcxproj</p>
+	<p lastconfig="ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2016.vcxproj</p>
+	</g>
+	
+	<g ProjectName="AutoCAD Mechanical">
+	<!--AutoCadMechanical-->
+	
+	<p lastconfig="ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2007.vcproj</p>
+	
+	<p lastconfig="ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2008.vcproj</p>
+	<p lastconfig="2010_ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2010.vcproj</p>
+	
+	<p lastconfig="2011_ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2011.vcproj</p>
+	<p lastconfig="ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2012.vcxproj</p>	
+	
+	<p lastconfig="ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2013_vs10_x86.vcxproj</p>	
+	
+	<p lastconfig="ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2014_vs10_x86.vcxproj</p>
+	<p lastconfig="ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2015.vcxproj</p>
+	<p lastconfig="ReleaseWin32">Z:\CC\baoke_PLM_PDM7_6_Pro_SP1_20141030\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2016.vcxproj</p>
+	</g>
+</root>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<g ProjectName="Common">
+	<!--CommonAboutDlg-->
+	<d>C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CommonAboutDlg\UnicodeRelease</d>
+	<p lastconfig="UnicodeReleasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CommonAboutDlg\CommonAboutDlg_vs08_x64.vcproj</p>
+	<f src="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CommonAboutDlg\CommonAboutDlgU.lib"
+	dest="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\CadIPlatform\CommonAboutDlgU_x64.lib"/>
+	<f src="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CommonAboutDlg\CommonAboutDlgU.lib"
+	dest="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\CadDevCore\CommonAboutDlgU_x64.lib"/>
+	
+	<!--PlmLogin-->
+	<p lastconfig="Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\PLM_ufidaLoginModule\pdmLogin_vs08_x64.vcproj</p>
+	<f src="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\PLM_ufidaLoginModule\Debug&Release\pdmLogin_x64\Release\pdmLogin.lib"
+	dest="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\CadDevCore\pdmLogin_x64.lib"/>
+	<f src="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\PLM_ufidaLoginModule\Debug&Release\pdmLogin_x64\Release\pdmLogin.lib"
+	dest="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\CadIPlatform\pdmLogin_x64.lib"/>
+	
+	<!--CadDevCore-->
+	<p lastconfig="UReleasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\CadDevCore\CadDevCore_vs08_x64.vcproj</p>
+	<f src="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\CadDevCore\x64\URelease\CadDevCore.tlb"
+	dest="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\CadIPlatform\CadDevCore_x64.tlb"/>
+	
+	<!--CadIPlatform-->
+	<p lastconfig="Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\CadIPlatform\CadIPlatform_vs08_x64.vcproj</p>
+		<!--SolidEdge-->
+	<f src="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\CadIPlatform\x64\Release\CadIPlatform.tlb" 
+	dest="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouSEAddIn\CadIPlatform_x64.tlb"/>
+	<p lastconfig="Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouSEAddIn\YonyouSolidEdge_vs08_x64.vcproj</p>
+	
+	<!--UG-->
+	<f src="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\CadIPlatform\x64\Release\CadIPlatform.tlb" 
+	dest="C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouUGAddin\CadIPlatform_x64.tlb"/>
+	<p lastconfig="Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouUGAddin\YonyouUGAddin_x64_vs08_9.0.vcproj</p>
+	</g>
+	
+	
+	
+	<g ProjectName="CREO">
+	<!--Proe-->
+	<p lastconfig="Creo1.0_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFCreo1.0Addin_x64.vcxproj</p>
+	<p lastconfig="Creo2.0_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFCreo2.0Addin_x64.vcxproj</p>
+	<p lastconfig="Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFProEAddIn5_vs08_x64.vcproj</p>
+	<p lastconfig="Creo3.0_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFCreo3.0Addin_x64.vcxproj</p>
+	</g>
+	
+	<!--Inventor-->
+	<g ProjectName="INVENTOR">
+	<p lastconfig="Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\UfidaInventorIn\iUfidaPlugin_vs08_x64.vcproj</p>
+	</g>
+	
+	<!--SolidWorks-->
+	<g ProjectName="SolidWorks">
+	<p lastconfig="Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\UfidaSWAddIn\UfidaSWAddIn_vs08_x64.vcproj</p>
+	</g>
+	
+
+
+	<g ProjectName="ACAD STD">
+	<p lastconfig="2010_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2010_X64.vcproj</p>
+	<p lastconfig="2011_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2011_X64.vcproj</p>
+	<p lastconfig="2012_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2012_X64.vcproj</p>
+	<p lastconfig="2013_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2013_X64.vcxproj</p>
+	<p lastconfig="2014_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2014_X64.vcxproj</p>
+	<p lastconfig="2015_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2015_X64.vcxproj</p>
+	<p lastconfig="2016_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2016_X64.vcxproj</p>
+	<p lastconfig="2017_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2017_X64.vcxproj</p>
+	</g>
+	<g ProjectName="ACAD MEC">
+	<p lastconfig="2010_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2010_vs08_x64.vcproj</p>
+	<p lastconfig="2011_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2011_vs08_x64.vcproj</p>
+	<p lastconfig="2012_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2012_vs10_x64.vcxproj</p>
+	<p lastconfig="2013_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2013_vs10_x64.vcxproj</p>
+	<p lastconfig="2014_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2014_vs10_x64.vcxproj</p>
+	<p lastconfig="2015_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2015_vs12_x64.vcxproj</p>
+	<p lastconfig="2016_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2016_vs12_x64.vcxproj</p>
+	<p lastconfig="2017_Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2017_vs15_x64.vcxproj</p>
+	
+	<g ProjectName="ACAD ELC">
+	<p lastconfig="Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCADElectrical\AutoCADElectrical2015.vcxproj</p>
+	</g>
+	
+	</g>
+	<g ProjectName="CAXA">
+	<p lastconfig="Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\UfidaCAXAAddIn\UfidaCAXAAddIn2015_vs10_x64.vcxproj</p>
+	<p lastconfig="Releasex64">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\UfidaCAXAAddIn\UfidaCAXAAddIn2016_vs10_x64.vcxproj</p>
+	</g>
+	
+</root>

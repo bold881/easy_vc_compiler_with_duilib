@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<g ProjectName="PLM2017 x86">	
+	<!--CadDevCore-->
+	<p lastconfig="UReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\CadDevCore\CadDevCore.vcproj</p>
+	
+	<!--CadIPlatform-->
+	<p lastconfig="ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\CadIPlatform\CadIPlatform.vcproj</p>
+	</g>	
+
+	<g ProjectName="Harness">
+	<!--Harness-->
+	<!--<p lastconfig="ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\CADIHarnessPlugin\CADIHarnessPlugin\CADIHarnessPlugin.vcproj</p>-->
+	</g>	
+
+	<g ProjectName="CAXA">
+	<!--CAXA-->
+	<p lastconfig="">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\UfidaCAXAAddIn\UfidaCAXAAddIn2011_vs05_x86.vcxproj</p>
+	<p lastconfig="2013_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\UfidaCAXAAddIn\UfidaCAXAAddIn2013_vs10_x86.vcxproj</p>
+	<p lastconfig="2015_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\UfidaCAXAAddIn\UfidaCAXAAddIn2015_vs10_x86.vcxproj</p>
+	<p lastconfig="2016_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\UfidaCAXAAddIn\UfidaCAXAAddIn2016_vs10_x86.vcxproj</p>
+	</g>
+
+	<g ProjectName="Inventor">
+	<!--Inventor-->
+	<p lastconfig="ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\UfidaInventorIn\iUfidaPlugin_vs05_x86.vcproj</p>
+	</g>	
+
+	<g ProjectName="Proe">
+	<p lastconfig="ProE4.0_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFProEAddIn4_vs05_x86.vcproj</p>
+	<p lastconfig="Proe5.0_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFProEAddIn5_vs05_x86.vcproj</p>
+	<p lastconfig="Creo10_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFCreo1.0Addin_vs10_x86.vcxproj</p>
+	<p lastconfig="Creo20_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFCreo2.0Addin_vs10_x86.vcxproj</p>
+	<p lastconfig="Creo30_ReleaseWin32">C:\gongxl\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFCreo3.0Addin_vs12_x86.vcxproj</p>
+	</g>	
+
+	<!--SolidWorks-->
+	<g ProjectName="solidworks">
+	<p lastconfig="Release MinSizeWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\UfidaSWAddIn\UfidaSWAddIn_vs08_x86.vcproj</p>
+	</g>
+	<g ProjectName="AutoCad Electrical">
+	<!--AutoCADElectrical-->
+	<!--<p lastconfig="2010_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADElectrical\AutoCADElectrical2010.vcproj</p>
+	<p lastconfig="2011_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADElectrical\AutoCADElectrical2011.vcproj</p>
+	<p lastconfig="2012_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADElectrical\AutoCADElectrical2012.vcproj</p>
+	<p lastconfig="ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADElectrical\AutoCADElectrical2013.vcxproj</p>
+	<p lastconfig="ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADElectrical\AutoCADElectrical2014.vcxproj</p>-->
+	<p lastconfig="2015_ReleaseWin32">C:\gongxl\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADElectrical\AutoCADElectrical2015_vs12_x86.vcxproj</p>
+	<p lastconfig="2016_ReleaseWin32">C:\gongxl\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADElectrical\AutoCADElectrical2016_vs12_x86.vcxproj</p>
+	<p lastconfig="2017_ReleaseWin32">C:\gongxl\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADElectrical\AutoCADElectrical2017_vs15_x86.vcxproj</p>
+	</g>	
+
+	<g ProjectName="ACAD Mec">
+	
+	<p lastconfig="2007_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2007_vs05_x86.vcproj</p>
+	<p lastconfig="2008_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2008_vs05_x86.vcproj</p>
+	<p lastconfig="2010_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2010_vs08_x86.vcproj</p>
+	<p lastconfig="2011_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2011_vs08_x86.vcproj</p>
+	<p lastconfig="2012_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2012_vs10_x86.vcxproj</p>
+	<p lastconfig="2013_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2013_vs10_x86.vcxproj</p>
+	<p lastconfig="2014_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2014_vs10_x86.vcxproj</p>
+	<p lastconfig="">C:\gongxl\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2015_vs12_x86.vcxproj</p>
+	<p lastconfig="">C:\gongxl\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2016_vs12_x86.vcxproj</p>
+	<p lastconfig="">C:\gongxl\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2017_vs15_x86.vcxproj</p>
+	</g>	
+
+	<g ProjectName="AutoCAD Standard">
+	<p lastconfig="2007_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2007.vcproj</p>
+	
+	<p lastconfig="2008_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2008.vcproj</p>
+	
+	<p lastconfig="2009_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2009.vcproj</p>
+	
+	<p lastconfig="2010_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2010.vcproj</p>
+	
+	<p lastconfig="2011_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2011.vcproj</p>
+	
+	<p lastconfig="2012_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2012.vcproj</p>
+	
+	<p lastconfig="2013_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2013.vcxproj</p>
+	
+	<p lastconfig="2014_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2014.vcxproj</p>
+	
+	<p lastconfig="2015_ReleaseWin32">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2015.vcxproj</p>
+	<p lastconfig="2016_ReleaseWin32">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2016.vcxproj</p>
+	<p lastconfig="2017_ReleaseWin32">C:\gongxl\CC\github\PLMV2016SP1\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2017.vcxproj</p>
+	</g>
+	
+	<g ProjectName="SolidEdge">
+	<!--SolidEdge-->
+	<p lastconfig="ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouSEAddIn\YonyouSolidEdge_vs08_x86.vcproj</p>
+	</g>	
+
+	<g ProjectName="UG">
+	<!--UG-->
+	<p lastconfig="ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouUGAddin\YonyouUGAddin_vs05_x86.vcproj</p>
+	</g>
+	<g ProjectName="ZW">
+	<!--ZW-->
+	<p lastconfig="ZWCADCLASSIC_ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\ZWCADCLASSIC_vs08_x86.vcproj</p>
+	<p lastconfig="ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\ZWCAD2017_vs10_x86.vcxproj</p>
+	<p lastconfig="ReleaseWin32">Z:\CC\github\PLM2017CAD\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\ZWCADMEC2017_vs10_x86.vcxproj</p>
+	</g>
+</root>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<g ProjectName="7.8 SP1 x64">
+	<!--CommonAboutDlg-->
+	<d>C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CommonAboutDlg\UnicodeRelease</d>
+	<p lastconfig="UnicodeReleasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CommonAboutDlg\CommonAboutDlg_vs08_x64.vcproj</p>
+	<f src="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CommonAboutDlg\CommonAboutDlgU.lib"
+	dest="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\CommonAboutDlgU_x64.lib"/>
+	<f src="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CommonAboutDlg\CommonAboutDlgU.lib"
+	dest="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadDevCore\CommonAboutDlgU_x64.lib"/>
+	
+	<!--PlmLogin-->
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\PLM_ufidaLoginModule\pdmLogin_vs08_x64.vcproj</p>
+	<f src="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\PLM_ufidaLoginModule\Debug&Release\pdmLogin_x64\Release\pdmLogin.lib"
+	dest="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadDevCore\pdmLogin_x64.lib"/>
+	<f src="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\PLM_ufidaLoginModule\Debug&Release\pdmLogin_x64\Release\pdmLogin.lib"
+	dest="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\pdmLogin_x64.lib"/>
+	
+	<!--CadDevCore-->
+	<p lastconfig="UReleasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadDevCore\CadDevCore_vs08_x64.vcproj</p>
+	<f src="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadDevCore\x64\URelease\CadDevCore.tlb"
+	dest="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\CadDevCore_x64.tlb"/>
+	
+	<!--CadIPlatform-->
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\CadIPlatform_vs08_x64.vcproj</p>
+
+	<!--Proe-->
+	<f src="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\x64\Release\CadIPlatform.tlb" 
+	dest="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\CadIPlatform_x64.tlb"/>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFCreo2.0Addin_x64.vcxproj</p>
+	<d>C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\Release</d>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFProEAddIn5_vs08_x64.vcproj</p>
+	<d>C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\Release</d>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFCreo1.0Addin_x64.vcxproj</p>
+	<d>C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\Release</d>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\UFCreo3.0Addin_x64.vcxproj</p>
+	<d>C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaProEAddIn\Release</d>
+	
+	<!--Inventor-->
+	<f src="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\x64\Release\CadIPlatform.tlb" 
+	dest="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaInventorIn\CadIPlatform_x64.tlb"/>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaInventorIn\iUfidaPlugin_vs08_x64.vcproj</p>
+	
+	<!--SolidWorks-->
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\UfidaSWAddIn\UfidaSWAddIn_vs08_x64.vcproj</p>
+	
+	<!--SolidEdge-->
+	<f src="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\x64\Release\CadIPlatform.tlb" 
+	dest="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouSEAddIn\CadIPlatform_x64.tlb"/>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouSEAddIn\YonyouSolidEdge_vs08_x64.vcproj</p>
+	
+	<!--UG-->
+	<f src="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\CadIPlatform\x64\Release\CadIPlatform.tlb" 
+	dest="C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouUGAddin\CadIPlatform_x64.tlb"/>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouUGAddin\YonyouUGAddin_x64_vs08_9.0.vcproj</p>
+	</g>
+	<g ProjectName="Autocad Standard">
+	<!--AutoCadStandard-->
+	<p lastconfig="2010_Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2010_X64.vcproj</p>
+	
+	<p lastconfig="2011_Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2011_X64.vcproj</p>
+	
+	<p lastconfig="2012_Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2012_X64.vcproj</p>
+	
+	<p lastconfig="2013_Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2013_X64.vcxproj</p>
+	
+	<p lastconfig="2014_Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2014_X64.vcxproj</p>
+	
+	<p lastconfig="2015_Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2015_X64.vcxproj</p>
+	
+	<p lastconfig="2016_Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADStandard\AutoCADStandard2016_X64.vcxproj</p>
+	
+	</g>
+	<g ProjectName="ddd">
+	<!--AutoCadMechanical-->
+	<d>C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\x64\Release</d>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\CADIMec2010_vs08_x64.vcproj</p>
+	<d>C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\x64\Release</d>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\CADIMec2011_vs08_x64.vcproj</p>
+	<d>C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\x64\Release</d>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\CADIMec2012_x64.vcxproj</p>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2013_vs10_x64.vcxproj</p>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2014_vs10_x64.vcxproj</p>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2015_x64.vcxproj</p>
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCadMechanical\YonyouBomCADMechanical2016_x64.vcxproj</p>
+	
+	<!--AutoCadElectrical-->
+	<p lastconfig="Releasex64">C:\gongxl\CC\daifenga_PLM_PDM7_8_Pro_SP1_0922\PLM_PDM_VOB\PLM_CAD\CadIPlatform\YonyouAutoCADElectrical\AutoCADElectrical2015.vcxproj</p>
+	</g>
+</root>
