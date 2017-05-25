@@ -72,7 +72,11 @@ private:
 	// 删除文件夹及其中文件
 	bool DeleteDirectory(
 		const CString &strPath);
-
+		
+	// 处理每一个vcproj文件的替换
+	void VcProjFileOutputReplace(CString &originValue,
+		CString &newValue,
+		CString szFile);
 
 public:
 	// 编译
@@ -96,6 +100,10 @@ public:
 
 	// 解析总配置文件 
 	int ParseConfigFile(void);
+
+	// 查找替换输出目录的路径
+	void OutputReplace(CString &orginValue, 
+		CString &newValue);
 private:
 	bool CreateCompileBatchFile(
 		IN CString &szOriginalBatchFile,	// 原始的批处理文件

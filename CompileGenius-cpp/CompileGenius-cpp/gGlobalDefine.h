@@ -32,6 +32,8 @@ typedef struct compile_instance
 	CString szInstanceName;			// 编译选项的名称  如：Release_Chutian, Debug
 	CString szPlatfromVer;		// 编译的平台选项 如：Win32， x64
 	bool isSelected;			// 是否次编译选项被选中
+	CString szPreProcessDefine;		// 预处理器定义
+	CString szOutputPath;		// 输出目录路径
 }COMPILE_INSTANCE;
 
 //////////////////////////////////////////////////////////////////////////

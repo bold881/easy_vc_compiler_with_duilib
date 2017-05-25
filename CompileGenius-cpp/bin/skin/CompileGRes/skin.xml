@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<Window size="1020,610" roundcorner="2,2" caption="0,0,0,38" >
+<Window roundcorner="2,2" caption="0,0,0,38" sizebox="4,4,4,4" >
 	<Font name="微软雅黑" size="16"/>
 	<Font name="微软雅黑"/>
 	<Font name="微软雅黑" size="12" default="true"/>
@@ -16,15 +16,35 @@
 			<Button name="find_cfg" text="查找" height="23" width="60" hottextcolor="0xffff0000"/>
 			<Control width="20"/>
 		</HorizontalLayout>
-		<HorizontalLayout inset="0,8,0,0" height="350">
-			<List name="project_list" height="322" inset="1,1,1,0" itemselectedbkcolor="0xffdbdfe7" vscrollbar="true">
-				<ListHeader height="30" >
-					<ListHeaderItem minwidth="220" textcolor="0xff98999a" text="工程" font="1" bkimage="list_header_bk.png" sepwidth="1" sepimage="list_header_sep.png"/>
-					<ListHeaderItem minwidth="20" textcolor="0xff98999a" text="配置文件" font="1" bkimage="list_header_bk.png" sepwidth="1" sepimage="list_header_sep.png"/>
-					<ListHeaderItem minwidth="20" maxwidth="70" textcolor="0xff98999a" text="编译器版本" font="1" bkimage="list_header_bk.png" sepwidth="1" sepimage="list_header_sep.png"/>
-					<ListHeaderItem textcolor="0xff98999a" text="配置名称" font="1" bkimage="list_header_bk.png" sepwidth="1" sepimage="list_header_sep.png"/>
-					<ListHeaderItem textcolor="0xff98999a" text="编译平台" font="1" bkimage="list_header_bk.png" sepwidth="1" sepimage="list_header_sep.png"/>
-					<ListHeaderItem textcolor="0xff98999a" text="编译结果" font="1" bkimage="list_header_bk.png" />
+		<HorizontalLayout height="73">
+			<VerticalLayout height="73" >
+				<Label text="输出路径替换" font="1" height="23"/>
+				<HorizontalLayout height="23" >
+					<Label text="查找内容：" font="1" width="60"/>
+					<Edit height="23" name="edit_origin" />
+				</HorizontalLayout>
+				<Control height="4" />
+				<HorizontalLayout height="23" >
+					<Label text="替换为：" font="1" width="60"/>
+					<Edit height="23" name="edit_new" />
+				</HorizontalLayout>
+			</VerticalLayout>
+			<VerticalLayout width="50">
+				<Control width="50" />
+				<Button name="btn_replace" height="23" text="替换" width="60" hottextcolor="0xffff0000" pushedtextcolor="0xffcc0000" />
+			</VerticalLayout>
+		</HorizontalLayout>
+		<HorizontalLayout inset="0,8,0,0">
+			<List name="project_list" inset="1,1,1,0" itemselectedbkcolor="0xffdbdfe7" vscrollbar="true" childpadding="20" >
+				<ListHeader height="30" sepwidth="4">
+					<ListHeaderItem width="220" textcolor="0xff98999a" text="工程" font="1" bkimage="list_header_bk.png" sepimage="list_header_sep.png"/>
+					<ListHeaderItem minwidth="20" textcolor="0xff98999a" text="配置文件" font="1" bkimage="list_header_bk.png" sepimage="list_header_sep.png"/>
+					<ListHeaderItem minwidth="20" maxwidth="70" textcolor="0xff98999a" text="编译器版本" font="1" bkimage="list_header_bk.png" sepimage="list_header_sep.png"/>
+					<ListHeaderItem textcolor="0xff98999a" text="配置名称" font="1" bkimage="list_header_bk.png" sepimage="list_header_sep.png"/>
+					<ListHeaderItem maxwidth="55" minwidth="50" textcolor="0xff98999a" text="编译平台" font="1" bkimage="list_header_bk.png" sepimage="list_header_sep.png"/>
+					<ListHeaderItem maxwidth="55" minwidth="50" textcolor="0xff98999a" text="编译结果" font="1" bkimage="list_header_bk.png" sepimage="list_header_sep.png"/>
+					<ListHeaderItem textcolor="0xff98999a" text="编译预定义" font="1" bkimage="list_header_bk.png" sepimage="list_header_sep.png"/>
+					<ListHeaderItem textcolor="0xff98999a" text="输出目录" font="1" bkimage="list_header_bk.png" sepimage="list_header_sep.png"/>
 				</ListHeader>
 			</List>
 		</HorizontalLayout>

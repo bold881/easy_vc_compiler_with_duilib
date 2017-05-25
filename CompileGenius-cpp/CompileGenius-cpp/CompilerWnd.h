@@ -102,5 +102,10 @@ private:
 	DuiLib::CEditUI* m_pEditCfgPath;	// Edit用以显示历史配置文件
 
 	DuiLib::CButtonUI* m_pBtnFindCfgFile;	// 查找历史配置文件
-	
+
+	DuiLib::CButtonUI* m_pReplaceBtn;		// 查找和替换
+
+	DuiLib::CEditUI* m_pEditOriginValue;	// 原值编辑框
+
+	DuiLib::CEditUI* m_pEditNewValue;	// 新值编辑框
 };

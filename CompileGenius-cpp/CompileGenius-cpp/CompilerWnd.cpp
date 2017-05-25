@@ -76,6 +76,17 @@ void CCompilerWnd::Notify(DuiLib::TNotifyUI& msg)
 			pCmpModel->ParseConfigFile();
 			pCmpModel->ParseSpecCfgFile();
 			AddDataToUI();
+		} else if(msg.pSender == m_pReplaceBtn) {
+			m_pReplaceBtn->SetEnabled(false);
+			CString originValue = m_pEditOriginValue->GetText();
+			if(originValue.IsEmpty()) return;
+			CString newValue = m_pEditNewValue->GetText();
+			pCmpModel->OutputReplace(originValue, newValue);
+			m_pReplaceBtn->SetEnabled();
+			// reload
+			pCmpModel->ParseConfigFile();
+			pCmpModel->ParseSpecCfgFile();
+			AddDataToUI();
 		}
 	}
 	else if(msg.sType==_T("selectchanged"))
@@ -179,7 +190,35 @@ void CCompilerWnd::Notify(DuiLib::TNotifyUI& msg)
 			}
 			int nItem = _wtoi(szCtrlName.Left(szCtrlName.Find(_T("_"))));
 			int nCfg = _wtoi(szCtrlName.Mid(szCtrlName.Find(_T("_"))+1));
+			CString szCompileName = pListLabel->GetText();
+			CString szCompileVer = pListLabel->GetUserData();
 			
+			PROJECTDATA* pNode = &m_pPrjData->at(nItem);
+			COMPILE_NODE* pCompileNode = &pNode->childCompileNode.at(nCfg);
+			std::vector<COMPILE_INSTANCE>::iterator itInstance = pCompileNode->vecConfiguration.begin();
+			for (;itInstance!=pCompileNode->vecConfiguration.end(); itInstance++)
+			{
+				if(itInstance->szInstanceName == szCompileName 
+					&& itInstance->szPlatfromVer == szCompileVer)
+				{
+					CString preProcessor = szCtrlName + _T("_preprocessorDef");
+					DuiLib::CLabelUI* pLabelPreprocessorDef = static_cast<DuiLib::CLabelUI*>(m_pm.FindControl(preProcessor));
+					if(pLabelPreprocessorDef != NULL)
+					{
+						pLabelPreprocessorDef->SetText(itInstance->szPreProcessDefine);
+						pLabelPreprocessorDef->SetToolTip(itInstance->szPreProcessDefine);
+					}
+
+					CString outputFile = szCtrlName + _T("_outputFile");
+					DuiLib::CLabelUI* pLabelOutputFile = static_cast<DuiLib::CLabelUI*>(m_pm.FindControl(outputFile));
+					if(pLabelOutputFile != NULL)
+					{
+						pLabelOutputFile->SetText(itInstance->szOutputPath);
+						pLabelOutputFile->SetToolTip(itInstance->szOutputPath);
+					}
+				}
+			}
+
 			CString szCfgName = CString(pCbBox->GetText())+pListLabel->GetUserData();
 			setCmpCfgSelected(nItem, nCfg, szCfgName);
 			if(pCmpModel!=NULL){
@@ -275,21 +314,21 @@ LRESULT CCompilerWnd::OnNcHitTest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL&
 	RECT rcClient;
 	::GetClientRect(*this, &rcClient);
 
-	// 		if( !::IsZoomed(*this) ) {
-	// 			RECT rcSizeBox = m_pm.GetSizeBox();
-	// 			if( pt.y < rcClient.top + rcSizeBox.top ) {
-	// 				if( pt.x < rcClient.left + rcSizeBox.left ) return HTTOPLEFT;
-	// 				if( pt.x > rcClient.right - rcSizeBox.right ) return HTTOPRIGHT;
-	// 				return HTTOP;
-	// 			}
-	// 			else if( pt.y > rcClient.bottom - rcSizeBox.bottom ) {
-	// 				if( pt.x < rcClient.left + rcSizeBox.left ) return HTBOTTOMLEFT;
-	// 				if( pt.x > rcClient.right - rcSizeBox.right ) return HTBOTTOMRIGHT;
-	// 				return HTBOTTOM;
-	// 			}
-	// 			if( pt.x < rcClient.left + rcSizeBox.left ) return HTLEFT;
-	// 			if( pt.x > rcClient.right - rcSizeBox.right ) return HTRIGHT;
-	// 		}
+	if( !::IsZoomed(*this) ) {
+		RECT rcSizeBox = m_pm.GetSizeBox();
+		if( pt.y < rcClient.top + rcSizeBox.top ) {
+			if( pt.x < rcClient.left + rcSizeBox.left ) return HTTOPLEFT;
+			if( pt.x > rcClient.right - rcSizeBox.right ) return HTTOPRIGHT;
+			return HTTOP;
+		}
+		else if( pt.y > rcClient.bottom - rcSizeBox.bottom ) {
+			if( pt.x < rcClient.left + rcSizeBox.left ) return HTBOTTOMLEFT;
+			if( pt.x > rcClient.right - rcSizeBox.right ) return HTBOTTOMRIGHT;
+			return HTBOTTOM;
+		}
+		if( pt.x < rcClient.left + rcSizeBox.left ) return HTLEFT;
+		if( pt.x > rcClient.right - rcSizeBox.right ) return HTRIGHT;
+	}
 
 	RECT rcCaption = m_pm.GetCaptionRect();
 	if( pt.x >= rcClient.left + rcCaption.left && pt.x < rcClient.right - rcCaption.right \
@@ -377,7 +416,7 @@ LRESULT CCompilerWnd::OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL
 // 屏蔽双击窗体放大整个窗口
 LRESULT CCompilerWnd::OnNcDBClick(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-	bHandled = TRUE;
+	bHandled = FALSE;
 	return 0L;
 }
 
@@ -431,6 +470,10 @@ void CCompilerWnd::OnPrepare()
 	m_pCtrlBuildString = static_cast<DuiLib::CRichEditUI*>(m_pm.FindControl(_T("buildresult")));
 	m_pEditCfgPath = static_cast<DuiLib::CEditUI*>(m_pm.FindControl(_T("cfg_path")));
 	m_pBtnFindCfgFile = static_cast<DuiLib::CButtonUI*>(m_pm.FindControl(_T("find_cfg")));
+	m_pReplaceBtn = static_cast<DuiLib::CButtonUI*>(m_pm.FindControl(_T("btn_replace")));
+	m_pEditOriginValue = static_cast<DuiLib::CEditUI*>(m_pm.FindControl(_T("edit_origin")));
+	m_pEditNewValue = static_cast<DuiLib::CEditUI*>(m_pm.FindControl(_T("edit_new")));
+
 	// 添加数据到界面
 	AddDataToUI();
 }
@@ -506,6 +549,8 @@ void CCompilerWnd::AddNodeToUI(PROJECTDATA& pNode, int& nIndex)
 {
 	DuiLib::CListContainerElementUI *pItem = new DuiLib::CListContainerElementUI;
 	m_pProjectList->InsertItem(nIndex, pNode.childCompileNode.size()*23, pItem);
+	pItem->SetBorderSize(1);
+	pItem->SetBorderColor(0xFFbbbbbb);
 
 	// 工程
 	DuiLib::CHorizontalLayoutUI* pHor = new DuiLib::CHorizontalLayoutUI;
@@ -513,6 +558,8 @@ void CCompilerWnd::AddNodeToUI(PROJECTDATA& pNode, int& nIndex)
 	DuiLib::CVerticalLayoutUI* pVecLeft = new DuiLib::CVerticalLayoutUI;
 	pVecLeft->ApplyAttributeList(_T("width=\"50\""));
 	pHor->Add(pVecLeft);
+	pHor->SetChildPadding(4);
+
 	// 项目选取
 	DuiLib::COptionUI *pCheck = new DuiLib::COptionUI;
 	pCheck->ApplyAttributeList(_T("width=\"25\" height=\"25\" normalimage=\"file='short69_cube_op_img_0.png' dest='7,4,22,19'\" selectedimage=\"file='short69_cube_op_img_1.png' dest='7,4,22,19'\""));
@@ -535,9 +582,11 @@ void CCompilerWnd::AddNodeToUI(PROJECTDATA& pNode, int& nIndex)
 	DuiLib::CVerticalLayoutUI* pVecChdPrjPath = new DuiLib::CVerticalLayoutUI;
 	pItem->Add(pVecChdPrjPath);
 
+
 	// 编译器版本
 	DuiLib::CVerticalLayoutUI* pVecCmpVer = new DuiLib::CVerticalLayoutUI;
 	pItem->Add(pVecCmpVer);
+
 
 	// 编译器选项
 	DuiLib::CVerticalLayoutUI* pVecCmpCfg = new DuiLib::CVerticalLayoutUI;
@@ -548,9 +597,20 @@ void CCompilerWnd::AddNodeToUI(PROJECTDATA& pNode, int& nIndex)
 	DuiLib::CVerticalLayoutUI* pVecPlatformVer = new DuiLib::CVerticalLayoutUI;
 	pItem->Add(pVecPlatformVer);
 
+
 	// 编译结果
 	DuiLib::CVerticalLayoutUI* pVecCmpResult = new DuiLib::CVerticalLayoutUI;
 	pItem->Add(pVecCmpResult);
+
+
+	// Preprocessordefinitions
+	DuiLib::CVerticalLayoutUI* pVecPreProcessorDef = new DuiLib::CVerticalLayoutUI;
+	pItem->Add(pVecPreProcessorDef);
+
+
+	// Output File
+	DuiLib::CVerticalLayoutUI* pVecOutputFile = new DuiLib::CVerticalLayoutUI;
+	pItem->Add(pVecOutputFile);
 
 
 	std::vector<COMPILE_NODE>::iterator childIt = pNode.childCompileNode.begin();
@@ -682,6 +742,41 @@ void CCompilerWnd::AddNodeToUI(PROJECTDATA& pNode, int& nIndex)
 		szResultName.Format(_T("%d_%d_result"), nIndex, childIndex);
 		pBtnResult->SetName(szResultName);
 		pVecCmpResult->Add(pBtnResult);
+
+
+		// PreprocessorDefinitions
+		DuiLib::CLabelUI* pLabelPreprocessorDef = new DuiLib::CLabelUI;
+		for (int vecCfgIndex = 0; vecCfgIndex < childIt->vecConfiguration.size(); vecCfgIndex++)
+		{
+			if(childIt->vecConfiguration.at(vecCfgIndex).isSelected)
+			{
+				pLabelPreprocessorDef->SetText(childIt->vecConfiguration.at(vecCfgIndex).szPreProcessDefine);
+				pLabelPreprocessorDef->SetToolTip(childIt->vecConfiguration.at(vecCfgIndex).szPreProcessDefine);
+				break;
+			}
+		}
+		CString szPreprocessorDefName;
+		szPreprocessorDefName.Format(_T("%d_%d_preprocessorDef"), nIndex, childIndex);
+		pLabelPreprocessorDef->SetName(szPreprocessorDefName);
+		pLabelPreprocessorDef->SetFixedHeight(23);
+		pVecPreProcessorDef->Add(pLabelPreprocessorDef);
+
+		// OutputFile
+		DuiLib::CLabelUI* pLabelOutputFile = new DuiLib::CLabelUI;
+		for (int vecCfgIndex = 0; vecCfgIndex < childIt->vecConfiguration.size(); vecCfgIndex++)
+		{
+			if(childIt->vecConfiguration.at(vecCfgIndex).isSelected)
+			{
+				pLabelOutputFile->SetText(childIt->vecConfiguration.at(vecCfgIndex).szOutputPath);
+				pLabelOutputFile->SetToolTip(childIt->vecConfiguration.at(vecCfgIndex).szOutputPath);
+				break;
+			}
+		}
+		CString szOutputFilePathName;
+		szOutputFilePathName.Format(_T("%d_%d_outputFile"), nIndex, childIndex);
+		pLabelOutputFile->SetName(szOutputFilePathName);
+		pLabelOutputFile->SetFixedHeight(23);
+		pVecOutputFile->Add(pLabelOutputFile);
 	}
 }
 

@@ -21,6 +21,12 @@ CompileModel::~CompileModel(void)
 #define CONFIGURATIONS			_T("Configurations")
 #define CONFIGURATION			_T("Configuration")
 #define PROPERTYGROUP			_T("PropertyGroup")
+#define	CONFIGURATION_TOOL		_T("Tool")
+
+#define VCCOMPILERTOOL		_T("VCCLCompilerTool")
+#define VCLINKERTOOL		_T("VCLinkerTool")
+#define PREPROCESSOR_DEFINITIONS		_T("PreprocessorDefinitions")
+#define OUTPUTFILE		_T("OutputFile")
 
 #define VS_05_08_HEADER _T("VisualStudioProject")
 #define VS_10_12_15HEADER _T("Project")
@@ -391,6 +397,28 @@ void CompileModel::ParseVcProjFile(COMPILE_NODE& pNode, CString &szFile)
 						cpInstance.isSelected = true;
 					else
 						cpInstance.isSelected = false;
+					
+
+					xmlProj.IntoElem();
+					while(xmlProj.FindElem(CONFIGURATION_TOOL))
+					{
+						// Get PreprocessorDefinitions from VCCLCompilerTool
+						CString szToolTemp = xmlProj.GetAttrib(_T("Name")).c_str();
+						if(szToolTemp.IsEmpty())
+						{
+							continue;
+						}
+
+						if(szToolTemp == VCCOMPILERTOOL) {
+							cpInstance.szPreProcessDefine = xmlProj.GetAttrib(PREPROCESSOR_DEFINITIONS).c_str();
+						}
+						// Get OutputFile from VCLinkerTool
+						if(szToolTemp == VCLINKERTOOL) {
+							cpInstance.szOutputPath = xmlProj.GetAttrib(OUTPUTFILE).c_str();
+						}
+					}
+					xmlProj.OutOfElem();
+
 					pNode.vecConfiguration.push_back(cpInstance);
 				}
 			}
@@ -438,6 +466,27 @@ void CompileModel::ParseVcProjFile(COMPILE_NODE& pNode, CString &szFile)
 				cpInstance.szInstanceName = szCondition;
 				cpInstance.szPlatfromVer = _T("Win32");
 			}
+
+			// PreProcessorDefinitions
+			if(xmlProj.FindChildElem(_T("ClCompile")))
+			{
+				xmlProj.IntoElem();
+				if(xmlProj.FindChildElem(_T("PreprocessorDefinitions"))) {
+					cpInstance.szPreProcessDefine = xmlProj.GetChildData().c_str();
+				}
+				xmlProj.OutOfElem();
+			}
+			
+			// OutputFile
+			if(xmlProj.FindChildElem(_T("Link")))
+			{
+				xmlProj.IntoElem();
+				if(xmlProj.FindChildElem(_T("OutputFile"))) {
+					cpInstance.szOutputPath = xmlProj.GetChildData().c_str();
+				}
+				xmlProj.OutOfElem();
+			}
+
 			if((cpInstance.szInstanceName+cpInstance.szPlatfromVer)
 				== pNode.szLastCfg)
 				cpInstance.isSelected = true;
@@ -887,4 +936,126 @@ void CompileModel::SetDefaultConfigProfile(COMPILE_NODE& pNode)
 	if(selectedIndex == -1)
 		return;
 	pNode.vecConfiguration.at(selectedIndex).isSelected = true;
+}
+
+
+void CompileModel::OutputReplace(CString &orginValue, 
+								 CString &newValue) 
+{
+	std::vector<PROJECTDATA>::iterator itProj = m_PrjData.begin();
+	for (; itProj!=m_PrjData.end(); itProj++)
+	{
+		std::vector<COMPILE_NODE>::iterator childIt = itProj->childCompileNode.begin();
+		for (int childIndex=0; childIt!=itProj->childCompileNode.end(); childIt++, childIndex++)
+		{
+			VcProjFileOutputReplace(
+				orginValue,
+				newValue,
+				childIt->sz_PrjFilePath);
+		}
+	}
+}
+
+
+void CompileModel::VcProjFileOutputReplace(CString &originValue,
+										   CString &newValue,
+										   CString szFile)
+{
+	if(szFile.IsEmpty()) return;
+
+	bool outputSet = false;
+	::CMarkup xmlProj;
+	if(!xmlProj.Load(szFile.GetBuffer(szFile.GetLength())))
+	{	
+		szFile.ReleaseBuffer();
+		return;
+	}
+	szFile.ReleaseBuffer();
+
+	if(xmlProj.FindElem(VS_05_08_HEADER))// vs2005 vs2008工程
+	{
+		xmlProj.IntoElem();
+
+		if(xmlProj.FindElem(CONFIGURATIONS))
+		{
+			xmlProj.IntoElem();
+			while (xmlProj.FindElem(CONFIGURATION))
+			{
+				CString szTemp = xmlProj.GetAttrib(_T("Name")).c_str();
+				if(!szTemp.IsEmpty())
+				{
+					xmlProj.IntoElem();
+					while(xmlProj.FindElem(CONFIGURATION_TOOL))
+					{
+						// Get PreprocessorDefinitions from VCCLCompilerTool
+						CString szToolTemp = xmlProj.GetAttrib(_T("Name")).c_str();
+						if(szToolTemp.IsEmpty())
+						{
+							continue;
+						}
+
+						//if(szToolTemp == VCCOMPILERTOOL) {
+						//	cpInstance.szPreProcessDefine = xmlProj.GetAttrib(PREPROCESSOR_DEFINITIONS).c_str();
+						//}
+
+						// Get OutputFile from VCLinkerTool
+						if(szToolTemp == VCLINKERTOOL) {
+							CString szOutputPath = xmlProj.GetAttrib(OUTPUTFILE).c_str();
+							if(szOutputPath.Replace(originValue, newValue) > 0)
+							{
+								xmlProj.SetAttrib(OUTPUTFILE, szOutputPath.GetBuffer(szOutputPath.GetLength()));
+								szOutputPath.ReleaseBuffer();
+								outputSet = true;
+							}
+						}
+					}
+					xmlProj.OutOfElem();
+				}
+			}
+		}
+	}
+	else if(xmlProj.FindElem(VS_10_12_15HEADER))
+	{
+		// vs2010 vs2012工程
+		xmlProj.IntoElem();
+		xmlProj.ResetMainPos();
+		while (xmlProj.FindElem(_T("ItemDefinitionGroup")))
+		{
+			// PreProcessorDefinitions
+			//if(xmlProj.FindChildElem(_T("ClCompile")))
+			//{
+			//	xmlProj.IntoElem();
+			//	if(xmlProj.FindChildElem(_T("PreprocessorDefinitions"))) {
+			//		cpInstance.szPreProcessDefine = xmlProj.GetChildData().c_str();
+			//	}
+			//	xmlProj.OutOfElem();
+			//}
+
+			// OutputFile
+			if(xmlProj.FindChildElem(_T("Link")))
+			{
+				xmlProj.IntoElem();
+				if(xmlProj.FindChildElem(_T("OutputFile"))) {
+					CString szOutputPath = xmlProj.GetChildData().c_str();
+					if(szOutputPath.Replace(originValue, newValue) > 0)
+					{
+						xmlProj.SetChildData(szOutputPath.GetBuffer(szOutputPath.GetLength()));
+						szOutputPath.ReleaseBuffer();
+						outputSet = true;
+					}
+				}
+				xmlProj.OutOfElem();
+			}
+		}
+	}
+	else
+	{
+		// 其他位置工程
+	}
+
+	// save vc proj file
+	if(outputSet) {
+		xmlProj.Save(szFile.GetBuffer(szFile.GetLength()));
+		szFile.ReleaseBuffer();
+	}
 }
